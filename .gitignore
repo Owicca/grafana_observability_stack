@@ -1,0 +1,16 @@
+# gf
+/gf/data/*
+!/gf/data/.gitkeep
+
+/gf/log/*
+!/gf/log/.gitkeep
+
+/gf/plugins/*
+!/gf/provisioning/.gitkeep
+
+# loki
+/loki/data/*
+!/loki/data/.gitkeep
+
+# pt
+/pt/test/

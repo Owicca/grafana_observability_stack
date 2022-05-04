@@ -1,0 +1,42 @@
+version: "3.1"
+
+services:
+  gf_gf:
+    image: grafana/grafana:8.5.0
+    container_name: gf_gf
+    user: "1000:1000"
+    networks:
+      - gf_local
+    ports:
+      - 3000:3000
+    volumes:
+      - ./gf/data/:/var/lib/grafana/
+      - ./gf/log/:/var/log/grafana/
+      - ./gf/provisioning/:/etc/grafana/provisioning/
+      - ./gf/plugins/:/var/lib/grafana/plugins/
+      - ./gf/config/grafana.ini:/etc/grafana/grafana.ini
+
+  gf_loki:
+    image: grafana/loki:2.5.0
+    container_name: gf_loki
+    user: "1000:1000"
+    networks:
+      - gf_local
+    ports:
+      - 3100:3100
+    volumes:
+      - ./loki/data/:/loki
+
+  gf_pt:
+    image: grafana/promtail
+    container_name: gf_pt
+    networks:
+      - gf_local
+    volumes:
+      - ./pt/config/:/config/
+      - ./pt/test/:/log/
+    entrypoint: ["promtail", "-config.file", "/config/linux.yaml"]
+
+networks:
+  gf_local:
+    name: gf_local

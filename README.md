@@ -1,0 +1,9 @@
+### fields:
+- time
+- host
+- type:
+  - os
+  - system
+  - docker
+  - file
+- msg
